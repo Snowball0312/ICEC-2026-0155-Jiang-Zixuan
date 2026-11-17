@@ -1,0 +1,10 @@
+# 保留原始字节，禁止换行符转换
+# 课题10 的样本文件刻意混用 CRLF / LF / BOM，是实验设计的一部分，
+# 一旦被 git 规范化，样本就失真、实验无法复现。
+* -text
+
+# 二进制
+*.png binary
+*.docx binary
+*.xlsx binary
+*.svg -text

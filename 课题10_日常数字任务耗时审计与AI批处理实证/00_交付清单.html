@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课题10 交付清单 · 日常数字任务耗时审计与 AI 批处理实证</title>
+<style>
+  :root{
+    --ink:#16181d; --ink2:#4a4f5a; --ink3:#7c8493;
+    --line:#e3e6ec; --bg:#f2f4f7; --card:#ffffff;
+    --accent:#1d4ed8; --accent-soft:#e8edfd;
+    --ok:#15803d; --ok-soft:#eaf6ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+    line-height:1.7; padding:36px 20px 64px;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+  header{margin-bottom:28px}
+  .kicker{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600;text-transform:uppercase}
+  h1{font-size:27px;line-height:1.35;margin:8px 0 10px;letter-spacing:-.01em}
+  .meta{font-size:13px;color:var(--ink3)}
+  .meta span+span::before{content:"·";margin:0 8px;color:#c3c8d2}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:16px}
+  h2{font-size:15px;letter-spacing:.02em;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  h2 .no{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:6px;background:var(--accent-soft);
+    color:var(--accent);font-size:12px;font-weight:700;flex:none;
+  }
+  p.lead{font-size:14px;color:var(--ink2);margin-bottom:14px}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;color:var(--ink3);font-weight:600;letter-spacing:.04em;background:#fafbfc}
+  tr:last-child td{border-bottom:none}
+  td,th{overflow-wrap:anywhere}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:12.5px;background:#f4f6f8;padding:1px 5px;border-radius:4px}
+
+  .ok{display:inline-block;font-size:12px;font-weight:600;color:var(--ok);background:var(--ok-soft);padding:1px 8px;border-radius:999px;white-space:nowrap}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(29,78,216,.25)}
+  a:hover{border-bottom-color:var(--accent)}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .kpi .v{font-size:21px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi .l{font-size:12px;color:var(--ink3);margin-top:2px}
+
+  .bar{display:flex;height:30px;border-radius:6px;overflow:hidden;margin:16px 0 8px;font-size:11.5px;color:#fff;font-weight:600;gap:2px}
+  .bar .h{background:#dc2626;display:flex;align-items:center;padding-left:14px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden}
+  .bar .a{background:#1d4ed8;display:flex;align-items:center;justify-content:center;padding:0 10px;flex:0 0 auto;white-space:nowrap}
+
+  ul.clean{list-style:none;font-size:13.5px;color:var(--ink2)}
+  ul.clean li{padding:6px 0 6px 18px;position:relative;border-bottom:1px solid #f1f3f6}
+  ul.clean li:last-child{border-bottom:none}
+  ul.clean li::before{content:"";position:absolute;left:2px;top:14px;width:6px;height:6px;border-radius:2px;background:var(--accent);opacity:.55}
+  ul.clean b{color:var(--ink);font-weight:600}
+
+  footer{margin-top:30px;font-size:12px;color:var(--ink3);text-align:center}
+  @media (max-width:720px){ .kpis{grid-template-columns:1fr 1fr} }
+  @media print{
+    body{background:#fff;padding:0;font-size:12px}
+    .card{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">课程作业 · 课题 10 · 交付清单</div>
+    <h1>日常数字任务耗时审计与 AI 批处理实证</h1>
+    <div class="meta">
+      <span>采样任务：报销票据批量改名</span><span>10 组 × 12 份 = 120 份</span><span>人工实测由本人完成</span><span>2026 年 11 月</span>
+    </div>
+  </header>
+
+  <div class="card">
+    <h2><span class="no">✓</span>交付要求对照</h2>
+    <p class="lead">课题要求：记录一项高频重复性数字任务，对比人工与 AI 脚本处理 10 个样本的耗时；提交任务样本、AI 脚本/Prompt、耗时对比表，并制定人机校验规则。</p>
+    <table>
+      <tr><th style="width:22%">要求</th><th style="width:48%">本目录对应内容</th><th style="width:30%">状态</th></tr>
+      <tr><td>任务样本</td><td><code>01_任务样本/</code> 10 组 × 12 份原始文件 + 标准答案 + 人工组操作手册</td><td><span class="ok">120 份</span></td></tr>
+      <tr><td>AI 脚本 / Prompt</td><td><code>02_AI脚本与Prompt/</code> 主体脚本 + 样本生成 + 计时 + 核验，附可复现提示词</td><td><span class="ok">4 脚本 + Prompt</span></td></tr>
+      <tr><td>耗时对比表</td><td><code>03_耗时对比表/</code> 5 个工作表的 Excel + 原始测量数据</td><td><span class="ok">提速 917 倍</span></td></tr>
+      <tr><td>人机校验规则</td><td><code>04_人机校验规则/</code> 7 条判据 + 执行顺序 + 实测验证结果</td><td><span class="ok">7 条全部通过</span></td></tr>
+      <tr><td>实证报告</td><td><code>05_实证报告/</code> 课题10_实证报告.docx</td><td><span class="ok">含附录样本与代码</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">1</span>核心结果</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="v">222.03 s</div><div class="l">人工单组均值</div></div>
+      <div class="kpi"><div class="v">0.2422 s</div><div class="l">AI 单组中位耗时</div></div>
+      <div class="kpi"><div class="v">917×</div><div class="l">整体提速倍数</div></div>
+      <div class="kpi"><div class="v">90.8%</div><div class="l">人工准确率（错 11 处）</div></div>
+    </div>
+    <div class="bar">
+      <div class="h" style="width:96%">人工 2220.33 s</div>
+      <div class="a">AI 2.42 s</div>
+    </div>
+    <table>
+      <tr><th style="width:34%">指标</th><th class="num">人工组</th><th class="num">AI 组</th></tr>
+      <tr><td>单组均值 / 中位数</td><td class="num">222.03 s</td><td class="num">0.2422 s</td></tr>
+      <tr><td>10 组合计</td><td class="num">2220.33 s</td><td class="num">2.4215 s</td></tr>
+      <tr><td>单份文件平均</td><td class="num">18.50 s</td><td class="num">0.0202 s</td></tr>
+      <tr><td>准确率</td><td class="num">90.8%（11/120 错）</td><td class="num">100%（120/120）</td></tr>
+      <tr><td>错误性质</td><td>执行层手误：误触、没点中、打字错误</td><td>无</td></tr>
+    </table>
+    <p class="lead" style="margin:12px 0 0;font-size:12.5px;color:var(--ink3)">
+      盈亏平衡：搭建成本按 30 分钟计，每批节省 3.70 分钟，约 8.1 批回本；每天 1 批则第 9 个工作日之后为净收益，一年约省 15.4 小时。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">2</span>任务样本</h2>
+    <table>
+      <tr><th style="width:40%">内容</th><th>说明</th></tr>
+      <tr><td><a href="01_任务样本/样本原始文件/">样本原始文件/</a></td><td>10 组，每组 12 份（10 份票据需改名 + 2 份非票据须保持原名），共 120 份。固定种子生成，重跑结果完全一致</td></tr>
+      <tr><td><a href="01_任务样本/标准答案/">标准答案/</a></td><td>每组一份 CSV，逐文件记录正确新文件名与三个字段，用于全量核算准确率（报告中写作 <code>ground_truth</code>）</td></tr>
+      <tr><td><a href="01_任务样本/人工组操作手册.md">人工组操作手册.md</a></td><td>命名规则、计时口径、操作步骤、常见坑——保证人工与 AI 同一标准</td></tr>
+    </table>
+    <p class="lead" style="margin:12px 0 0;font-size:12.5px;color:var(--ink3)">
+      样本刻意做脏：10 种混乱文件名、4 种字段排版、BOM / CRLF / 全角空格混杂、金额写法不统一。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">3</span>AI 脚本与 Prompt</h2>
+    <table>
+      <tr><th style="width:34%">文件</th><th>作用</th></tr>
+      <tr><td><a href="02_AI脚本与Prompt/batch_rename.py">batch_rename.py</a></td><td>主体脚本，约 180 行、零依赖：编码兜底、两级日期解析、三项齐全才改名、幂等跳过、撞名加序号</td></tr>
+      <tr><td><a href="02_AI脚本与Prompt/make_samples.py">make_samples.py</a></td><td>样本生成器，固定种子复现 10 组样本与标准答案</td></tr>
+      <tr><td><a href="02_AI脚本与Prompt/run_timing.py">run_timing.py</a></td><td>端到端计时，每组 3 轮取中位数</td></tr>
+      <tr><td><a href="02_AI脚本与Prompt/verify.py">verify.py</a></td><td>与标准答案逐文件比对，输出正确数/错误明细</td></tr>
+      <tr><td><a href="02_AI脚本与Prompt/Prompt与脚本说明.md">Prompt与脚本说明.md</a></td><td><b>可直接复制的提示词</b> + 四个关键处理点 + 提示词约束与失效场景对照</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">4</span>耗时对比表</h2>
+    <p class="lead">
+      <a href="03_耗时对比表/课题10_耗时对比表.xlsx">课题10_耗时对比表.xlsx</a>
+      ——5 个工作表：汇总、耗时对比、人机校验、盈亏平衡、实验说明。人工数据为本人秒表实测（分.秒.百分秒换算）。
+    </p>
+    <table>
+      <tr><th style="width:40%">原始测量数据</th><th>说明</th></tr>
+      <tr><td><a href="03_耗时对比表/原始测量数据/ai_timing.csv">ai_timing.csv</a></td><td>逐轮原始计时（每组 3 轮）</td></tr>
+      <tr><td><a href="03_耗时对比表/原始测量数据/ai_timing_summary.csv">ai_timing_summary.csv</a></td><td>每组最小值 / 中位数 / 最大值</td></tr>
+      <tr><td><a href="03_耗时对比表/原始测量数据/ai_verify.csv">ai_verify.csv</a></td><td>每组正确数、错误数、准确率</td></tr>
+      <tr><td><a href="03_耗时对比表/原始测量数据/ai_errors.csv">ai_errors.csv</a></td><td>错误明细（本实验为空）</td></tr>
+      <tr><td><a href="03_耗时对比表/原始测量数据/idempotency_test.txt">idempotency_test.txt</a></td><td>幂等性验证记录：重跑新增 0 份</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">5</span>人机校验规则（7 条）</h2>
+    <p class="lead" style="margin-bottom:10px">全文见 <a href="04_人机校验规则/人机校验规则.md">人机校验规则.md</a>，含执行顺序与逐条实测结果。</p>
+    <ul class="clean">
+      <li><b>全量比对，不抽样</b>——120 份逐文件比对；抽样只能证明"没发现错"</li>
+      <li><b>数量守恒</b>——处理前后 12 = 12，不符即红线</li>
+      <li><b>反向校验</b>——2 份非票据必须仍是原名，票据全对但误改 README 仍判失败</li>
+      <li><b>幂等性</b>——同目录连跑两次，第二次改名数须为 0</li>
+      <li><b>不覆盖原则</b>——撞名加序号，出现 <code>_2</code> 需人工复核</li>
+      <li><b>可追溯</b>——manifest 记录"原文件名 → 新文件名 → 三字段"</li>
+      <li><b>小样本先跑</b>——先跑 1 组人工核对，再批量执行</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">6</span>实证报告</h2>
+    <p class="lead" style="margin-bottom:0">
+      <a href="05_实证报告/课题10_实证报告.docx">课题10_实证报告.docx</a>
+      ——摘要、选题依据、实验设计、AI 组实现、实测结果、人机校验规则、结论与局限，附录含样本示例与脚本节选。
+    </p>
+  </div>
+
+  <footer>课题 10 · 日常数字任务耗时审计与 AI 批处理实证　|　本页可直接用浏览器打印为 PDF</footer>
+</div>
+</body>
+</html>
