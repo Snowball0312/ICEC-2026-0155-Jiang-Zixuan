@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>项目03 交付清单 · 日常旋转机械电器异常声振诊断仪</title>
+<style>
+  :root{
+    --ink:#16181d; --ink2:#4a4f5a; --ink3:#7c8493;
+    --line:#e3e6ec; --bg:#f2f4f7; --card:#ffffff;
+    --accent:#0f766e; --accent-soft:#e6f4f1;
+    --ok:#15803d; --ok-soft:#eaf6ee;
+    --wait:#b45309; --wait-soft:#fdf3e3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+    line-height:1.7; padding:36px 20px 64px;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+  header{margin-bottom:28px}
+  .kicker{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600;text-transform:uppercase}
+  h1{font-size:27px;line-height:1.35;margin:8px 0 10px;letter-spacing:-.01em}
+  .meta{font-size:13px;color:var(--ink3)}
+  .meta span+span::before{content:"·";margin:0 8px;color:#c3c8d2}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:16px}
+  h2{font-size:15px;letter-spacing:.02em;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  h2 .no{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:6px;background:var(--accent-soft);
+    color:var(--accent);font-size:12px;font-weight:700;flex:none;
+  }
+  p.lead{font-size:14px;color:var(--ink2);margin-bottom:14px}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;color:var(--ink3);font-weight:600;letter-spacing:.04em;background:#fafbfc}
+  tr:last-child td{border-bottom:none}
+  td,th{overflow-wrap:anywhere}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:12.5px;background:#f4f6f8;padding:1px 5px;border-radius:4px}
+
+  .ok{display:inline-block;font-size:12px;font-weight:600;color:var(--ok);background:var(--ok-soft);padding:1px 8px;border-radius:999px;white-space:nowrap}
+  .wait{display:inline-block;font-size:12px;font-weight:600;color:var(--wait);background:var(--wait-soft);padding:1px 8px;border-radius:999px;white-space:nowrap}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(15,118,110,.25)}
+  a:hover{border-bottom-color:var(--accent)}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:6px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .kpi .v{font-size:21px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi .l{font-size:12px;color:var(--ink3);margin-top:2px}
+
+  .flow{background:#fafbfc;border:1px dashed #cfd6e0;border-radius:10px;padding:14px 18px;font-size:13.5px;color:var(--ink2)}
+  .flow b{color:var(--ink)}
+  .flow div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+  .flow span:last-child{color:var(--ink3);font-size:12.5px}
+
+  footer{margin-top:30px;font-size:12px;color:var(--ink3);text-align:center}
+  @media (max-width:720px){ .kpis{grid-template-columns:1fr 1fr} }
+  @media print{
+    body{background:#fff;padding:0;font-size:12px}
+    .card{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">课程作业 · 项目 03 · 交付清单</div>
+    <h1>基于手机内置传感器的日常旋转机械/电器异常声振诊断仪</h1>
+    <div class="meta">
+      <span>录音 系统录音机 48 kHz / 24 bit</span><span>5 工况 × 14 段</span><span>零第三方依赖</span>
+    </div>
+  </header>
+
+  <div class="card">
+    <h2><span class="no">✓</span>交付要求对照</h2>
+    <p class="lead">要求：用手机麦克风与加速度计采集<b>手持小风扇</b>在正常与模拟异常工况下的声振信号，写出时域/频域特征提取与频谱分类脚本，并给出盲测准确率与抗噪证据。异常工况在"不可拆机"的约束下，用<b>气动通路遮挡</b>实现（半遮挡 / 全遮挡 × 一档 / 二档 + 无遮挡基准）。</p>
+    <p class="muted" style="margin:10px 0 0;font-size:13px;line-height:1.7">
+      <b>模态说明（如实标注）</b>：系统支持声音 + 振动双通道，本次受采集端限制以<b>声学单模态</b>完成——
+      本机 Phyphox 精简版无「运动」实验，无法导出加速度；且实测叶片通过频率为 <b>661–1386 Hz</b>，
+      远超手机加速度计带宽（50–100 Hz）。代码保留 <code>--modality vib</code> 通路，数据补齐后可直接启用。
+    </p>
+    <table>
+      <tr><th style="width:26%">要求</th><th style="width:46%">对应内容</th><th style="width:28%">状态</th></tr>
+      <tr>
+        <td>5 种工况 × 15 组原始序列 + 实验照（20 分）</td>
+        <td><code>01_原始声振数据/</code> 五工况目录、<b>14 段</b> WAV（遮挡四类各 3 轮共 12 段 + 无遮挡基准 2 段，两档各 1）、3 张实验照、采集记录表。基准工况无可重复施加的变量，故两档各录 1 段，不按 3 轮重复（理由见报告 1、3.1 节）</td>
+        <td><span class="ok">已采集</span></td>
+      </tr>
+      <tr>
+        <td>时域/频域特征提取代码（20 分）</td>
+        <td><code>04_分析脚本/features.py</code> + <code>sndlib.py</code>，32 维特征，纯标准库</td>
+        <td><span class="ok">已就绪</span></td>
+      </tr>
+      <tr>
+        <td>盲测准确率视频与抗噪报告（20 分）</td>
+        <td><code>05_盲测与抗噪/</code>：现场 7 段盲测录音与逐段录屏、<code>盲测结果.csv</code>；<code>robustness.py</code> 白噪 + 粉噪各 8 档抗噪曲线</td>
+        <td><span class="ok">已录制</span>（视频待入库）</td>
+      </tr>
+      <tr>
+        <td>过程可复算</td>
+        <td><code>04_分析脚本/selftest.py</code> 一键自检；特征表 / 逐折结果 / 混淆矩阵全部落盘</td>
+        <td><span class="ok">已就绪</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">!</span>采集口径与要求的差异</h2>
+    <p class="lead">任务书要求的采集方式是<b>手机麦克风 + 加速度计</b>、<b>5 种工况 × 15 组</b>，盲测要求<b>他人设工况</b>。受硬件与现场条件限制，有 4 处未照字面执行；另有三处口径需要一并知道。逐条原因与影响见报告 <b>1.1 节</b>。</p>
+    <table>
+      <tr><th style="width:20%">要求</th><th style="width:28%">本次实际</th><th style="width:18%">性质</th><th>影响与补救</th></tr>
+      <tr>
+        <td>声振双模态（麦克风 + 加速度计）</td>
+        <td>仅手机麦克风，单通道声学</td>
+        <td><span class="wait">未执行</span></td>
+        <td>App 无「运动」实验可导出加速度，且 BPF 661–1386 Hz 远超加速度计带宽（50–100 Hz）。结论只覆盖气动噪声，标题按"声学诊断"；<code>--modality vib</code> 通路保留</td>
+      </tr>
+      <tr>
+        <td>5 工况 × 15 组</td>
+        <td>14 段（遮挡四类各 3 段 + 基准 2 段）</td>
+        <td><span class="wait">少 1 段</span></td>
+        <td>缺的是不进模型的基准第三段，任何指标不受影响；补录 20 s 三档无遮挡（<code>L0_r03_g3</code>）即可凑满</td>
+      </tr>
+      <tr>
+        <td>"模拟异常工况"（未限定类型）</td>
+        <td>气动通路遮挡（半/全 × 一档/二档）</td>
+        <td><span class="ok">等效替代</span></td>
+        <td>不可拆机、扇面 5 cm 无贴装面，做不了轴承类故障；换来可复现、可盲测、不接触机身。故障族单一，不外推</td>
+      </tr>
+      <tr>
+        <td>他人设工况的盲测</td>
+        <td>7 段本人设置、本人录音，每段有录屏</td>
+        <td><span class="wait">未完全执行</span></td>
+        <td>独立性弱于标准流程，83.3% 降级为流程演示；泛化证据取自按轮交叉验证（99.86% / 100%）</td>
+      </tr>
+    </table>
+    <p style="margin:12px 0 0;font-size:13px;color:#4a4f5a;line-height:1.7">
+      <b>三处口径差异：</b>① 手机与风扇均<b>平放桌面（非手持）</b>，网罩—麦克风净距 <b>12 cm</b>（照片标注 15 cm 是"扇体后端—手机边缘"的另一种量法，同一次布场）；平放姿态与真实手持使用不同，结论不外推到手持场景；② 电平为 <b>dBFS 相对值，未经声压级校准</b>，不能换算 dB SPL、不能跨设备比较；③ 14 段在同一小时内录完，轮次共享时段与环境，准确率偏乐观。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">1</span>实验设计：轮 × 工况</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="v">5</div><div class="l">工况（L0–L4）</div></div>
+      <div class="kpi"><div class="v">3</div><div class="l">轮次 r01–r03</div></div>
+      <div class="kpi"><div class="v">14</div><div class="l">段录音（已入库）</div></div>
+      <div class="kpi"><div class="v">32</div><div class="l">每窗特征维度</div></div>
+    </div>
+    <div class="flow" style="margin-top:14px">
+      <div><span><b>一轮</b> = 固定距离 12 cm，连续录 4 个遮挡工况</span><span>轮内环境一致</span></div>
+      <div><span><b>3 轮</b> = r01–r03 各连录四类；一档两类记 g1、二档两类记 g2，每段 20 s</span><span>可做档内对照</span></div>
+      <div><span><b>GroupKFold</b> = 按轮分组，整轮进出</span><span>杜绝窗口泄漏</span></div>
+    </div>
+    <p class="lead" style="margin:14px 0 0">
+      被测对象是<b>手持小风扇</b>（扇面 5 cm、3 档、一体注塑、不可拆机），因此不做拆机类故障，
+      而把「遮挡」拆成 <b>档位 × 程度</b> 两个因子，加无遮挡基准共五种工况。
+      档位不作为独立标签，而是与程度组合成工况名；为证明模型不是靠转速蒙对，另做<b>档内半/全遮挡二分类</b>对照。
+    </p>
+    <table style="margin-top:14px">
+      <tr><th style="width:8%">码</th><th style="width:16%">工况</th><th style="width:12%">档位</th><th style="width:10%">程度</th><th>制造方法（不拆机）</th><th style="width:26%">实测特征</th></tr>
+      <tr><td>L0</td><td>正常</td><td>1 档 / 2 档</td><td>0</td><td>纸片全部移出视场，自由进风</td><td>BPF 1106 / 1219 Hz，谱形单一</td></tr>
+      <tr><td>L1</td><td>一档半遮挡</td><td>1 档</td><td>半</td><td>一张纸片斜盖住扇面一侧</td><td>BPF 661–677 Hz，2–8k 占 0.14–0.19</td></tr>
+      <tr><td>L2</td><td>一档全遮挡</td><td>1 档</td><td>全</td><td>同一张纸片折起挡满扇面，四角轻贴留 3–5 mm 缝</td><td>BPF 1074–1090 Hz，质心 2227 Hz</td></tr>
+      <tr><td>L3</td><td>二档半遮挡</td><td>2 档</td><td>半</td><td>同 L1 的摆放，只按档位键</td><td>BPF 746–749 Hz，谱平坦度最低 0.008</td></tr>
+      <tr><td>L4</td><td>二档全遮挡</td><td>2 档</td><td>全</td><td>同 L2 的摆放，只按档位键</td><td>BPF 1189–1386 Hz，2–8k 占 0.36–0.38</td></tr>
+    </table>
+    <p class="muted" style="margin:10px 0 0;font-size:13px;line-height:1.7">
+      为什么不做"进风侧 / 出风侧"的位置因子：真机测试发现，一张纸片贴哪一面，人手难以稳定复现，
+      同一名义工况的两段录音会落到不同位置（这才是最初几批标签对不上的根源）。
+      改成"档位 × 程度"后，同遮挡程度的两类共用同一张照片、同一套摆放，类内一致性从"看运气"变成"可核对"（三段 BPF 极差 ≤ 2.4%）。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">2</span>分析脚本（12 个文件，纯标准库）</h2>
+    <table>
+      <tr><th style="width:30%">脚本</th><th>作用</th></tr>
+      <tr><td><a href="04_分析脚本/sndlib.py">sndlib.py</a></td><td>公共库：WAV/CSV 读取、分帧加窗、基 2 FFT、Hilbert 包络、32 维特征</td></tr>
+      <tr><td><a href="04_分析脚本/features.py">features.py</a></td><td>批量提特征，输出 <code>features.csv</code>，并打印每工况文件数核对（L1–L4 各 3 段、L0 2 段）</td></tr>
+      <tr><td><a href="04_分析脚本/train.py">train.py</a></td><td>收缩 LDA（kNN 对照）+ 按轮次 GroupKFold + <b>档内半/全遮挡对照</b>（<code>--baseline L0</code> 把基准工况留作参照），输出逐折结果、<code>cv_同档遮挡.csv</code>、混淆矩阵、分类报告、model.json</td></tr>
+      <tr><td><a href="04_分析脚本/predict.py">predict.py</a></td><td>单段盲测：窗口投票 → 工况 + 置信度 + 各工况占比，可加噪复测</td></tr>
+      <tr><td><a href="04_分析脚本/robustness.py">robustness.py</a></td><td>抗噪曲线：白噪/粉噪 × 最多 10 档 SNR，按 CPU 核数并行（实测 4 分钟一轮），输出 CSV 与结论段</td></tr>
+      <tr><td><a href="04_分析脚本/check_dataset.py">check_dataset.py</a></td><td>数据集体检：段数、命名、配图、削波、静音、轮次覆盖</td></tr>
+      <tr><td><a href="04_分析脚本/gear_check.py">gear_check.py</a></td><td>档位基线核查：一阶差分能量找按键瞬态 → 自动切段 → 每段读主音与最强 8 个谱峰（核对谐波族），用于把"标称档位"换成"实测档位"</td></tr>
+      <tr><td><a href="04_分析脚本/plotsvg.py">plotsvg.py</a></td><td>极简 SVG 绘图库：坐标轴、折线、填充、热力格、图例（手写，无 matplotlib）</td></tr>
+      <tr><td><a href="04_分析脚本/plot_figs.py">plot_figs.py</a></td><td>一键出 6 张图：波形、频谱、包络谱、特征散点、混淆矩阵、抗噪曲线</td></tr>
+      <tr><td><a href="04_分析脚本/svg_to_png.py">svg_to_png.py</a></td><td>借本机 Edge/Chrome 无头模式把 SVG 转 2× PNG，供 Word 插图</td></tr>
+      <tr><td><a href="04_分析脚本/run_all.py">run_all.py</a></td><td>一键流水线：体检 → 特征 → 训练 → 抗噪 → 出图 → 汇总 <code>一键结果.md</code></td></tr>
+      <tr><td><a href="04_分析脚本/selftest.py">selftest.py</a></td><td>管线自检：FFT/包络单元校验 + 合成信号端到端跑通（合成数据不参与交付）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="no">3</span>当前进度</h2>
+    <table>
+      <tr><th style="width:34%">环节</th><th>说明</th><th style="width:22%">状态</th></tr>
+      <tr><td>采集方案与命名规范</td><td><code>01_原始声振数据/00_工况定义与采集方案.md</code></td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>分析脚本与自检</td><td>12 个文件，<code>python selftest.py</code> 与 <code>run_all.py</code> 全部通过</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>原始数据采集</td><td>5 工况 14 段声学录音（48 kHz/24 bit，20 s/段），含 3 张实验照与记录表</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>特征表与模型</td><td>822 窗 / 704 窗入库；窗口级 99.86%、整段 100%、宏 F1 0.9986；档内对照 99.72% / 100%</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>档位基线核查</td><td>一次连录三段实测三档 1099 / 1207 / 1331 Hz（相邻 +10%）；半遮挡（纸片贴叶）使转速下降 38%，全遮挡几乎回到自由态（<code>05_盲测与抗噪/档位验证_20261122.csv</code>）</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>抗噪实验</td><td>白噪、粉噪各 8 档 SNR（clean, 20, 15, 12, 10, 5, 0, −5 dB）：白噪 20 dB 以内 100%、15 dB 75%、10 dB 及以下 25%；粉噪 12 dB 以内 100%、10 dB 50%</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>可视化与诊断报告</td><td><code>02_可视化图/</code> 6 张图（SVG + PNG，已逐张核过排版）；<code>06_诊断报告/诊断报告.md</code>（14 节 + 附录）</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>标签订正</td><td>用 7 段盲测查出建档 L2/L3 工况名互换，已对调 WAV 与文件名并重跑全流程；准确率未发生任何变化（99.86% / 100%），说明只更换了名称、未改动样本（报告 5.4 节）</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>边界核查（单特征消融）</td><td>同档位内两类转速差 60%，单用 BPF 一维即得整段 100%、窗口 92.33%（32 维为 99.86%）。据此只声明"遮挡可判"，不声明"判据与转速无关"（报告 10.5 节）</td><td><span class="ok">已完成</span></td></tr>
+      <tr><td>盲测录音 / 录屏</td><td>现场 7 段盲测已跑完（<code>05_盲测与抗噪/盲测结果.csv</code>）：6 段（1 段属 L0 不计）判对 5 段，遮挡方式 7/7 全对；这批盲测还查出建档 L2/L3 标签贴反并已订正（报告 5.4 节）。录屏已逐段拍摄，因单段体积较大，视频本体另存 <code>05_盲测与抗噪/现场录屏/</code></td><td><span class="ok">已录制</span>（视频待入库）</td></tr>
+    </table>
+  </div>
+
+  <footer>项目 03 · 日常旋转机械电器异常声振诊断仪　|　本页可直接用浏览器打印为 PDF</footer>
+</div>
+</body>
+</html>
